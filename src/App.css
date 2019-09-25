@@ -17,6 +17,15 @@
   color: white;
 }
 
+.red{
+  color: #d3061c;
+}
+
+.bold{
+  font-weight: bold;
+}
+
 .App-link {
   color: #09d3ac;
 }
+
