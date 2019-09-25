@@ -1,0 +1,34 @@
+.App {
+  text-align: center;
+}
+
+
+
+.red{
+  color: #ad4831;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.App button{
+  border: 1px solid #6699a0;
+  padding: 16px;
+  background-color: azure;
+  font: inherit;
+}
+
+.App button:hover{
+  border: 1px solid #1c4f84;
+  padding: 16px;
+  background-color: azure;
+  font: inherit;
+}
+
+.App button.RedButton{
+  border: 1px solid #841a24;
+  padding: 16px;
+  background-color: #ff93a0;
+  font: inherit;
+}

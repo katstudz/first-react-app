@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.module.css';
 import './Person/Person.css';
 import Person from './Person/Person'
 import Radium, {StyleRoot} from 'radium'
-
+import cssclasses from './App.module.css';
 
 class App extends Component {
 
@@ -43,66 +43,51 @@ class App extends Component {
     }
 
     render() {
-
-        const style = {
-            backgroundColor: '#bafff7',
-            color: 'black',
-            font: 'inherit',
-            border: '1px solid blue',
-            padding: '8px',
-            ':hover': {
-                backgroundColor: 'green',
-                color: 'black'
-            }
-        };
-
         let persons = null;
-        if (this.state.showPersons)
+        let buttonClass = ' ';
+
+        if (this.state.showPersons){
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
-                      return <Person
-                            click ={() => this.deletePerson(index)}
-                            key={person.id}
-                            name={person.name}
-                            changed={(event) => this.inputChangeName(event, person.id)}
-                        />
-                    })}
+                            return <Person
+                                click ={() => this.deletePerson(index)}
+                                key={person.id}
+                                name={person.name}
+                                changed={(event) => this.inputChangeName(event, person.id)}
+                            />
+                        }
+                    )}
                 </div>
-
             )
+        }
+
         else {
             persons = (
                 <div>
                     No people
                 </div>
-        )
-            style.backgroundColor = 'red';
-            style[':hover'] = {
-                backgroundColor : 'lightgreen'
-            }
+            )
+            buttonClass = cssclasses.RedButton;
         }
 
-        let classes = [];
-        if(this.state.persons.length <= 2){
-            classes.push('red');
-        }
-        else
-            classes.push('bold');
 
         return (
             <StyleRoot>
-                <p className={classes}>One two</p>
+            <div className={cssclasses.App}>
+                <p >One two</p>
 
                 <div>
                     <button
-                        style={style}
+                        className={buttonClass}
                         onClick={this.toogle}>People
                     </button>
                     {persons}
                 </div>
 
-            </StyleRoot>);
+            </div>
+            </StyleRoot>
+                );
     }
 }
 
