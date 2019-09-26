@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import './App.module.css';
-import './components/Persons/Person/Person.css';
-import Person from './components/Persons/Person/Person'
-import ErrorBoundary from './components/Error/ErrorBoundary'
 import Radium, {StyleRoot} from 'radium'
 import cssclasses from './App.module.css';
+import ErrorBoundary from "../components/Error/ErrorBoundary";
+import Person from "../components/Persons/Person/Person";
+import "../components/Persons/Person/Person.css";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
 
@@ -44,51 +45,15 @@ class App extends Component {
     }
 
     render() {
-        let persons = null;
-        let buttonClass = ' ';
-
-        if (this.state.showPersons){
-            persons = (
-                <div>
-                    {this.state.persons.map((person, index) => {
-                            return <ErrorBoundary
-                                key = {person.id}>
-                                <Person
-                                    click ={() => this.deletePerson(index)}
-                                    key={person.id}
-                                    name={person.name}
-                                    age={person.age}
-                                    changed={(event) => this.inputChangeName(event, person.id)}
-                                    />
-                        </ErrorBoundary>
-                        }
-                    )}
-                </div>
-            )
-        }
-
-        else {
-            persons = (
-                <div>
-                    No people
-                </div>
-            )
-            buttonClass = cssclasses.RedButton;
-        }
-
 
         return (
             <div className={cssclasses.App}>
-                <p >One two</p>
-
-                <div>
-                    <button
-                        className={buttonClass}
-                        onClick={this.toogle}>People
-                    </button>
-                    {persons}
-                </div>
-
+             <Cockpit
+                 showPersons = {this.state.showPersons}
+                 persons={this.state.persons}
+                 clicked ={this.toogle}
+             />
+                {persons}
             </div>
         );
     }
