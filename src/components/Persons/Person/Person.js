@@ -1,14 +1,13 @@
 import React from 'react';
 import Radium from "radium";
 const person = (props) => {
-    const style = {
-      '@media (min-width: 500px)':{
-          width: '450px'
-      }
-    };
+
+    if(props.age < 18){
+        throw new Error('cant drink alcohol');
+    }
 
     return (
-        <div className="Person" style={style}>
+        <div className="Person">
             <p onClick={props.click}> I'm a {props.name}</p>
             <p>{props.children}</p>
             <input type="text" onChange={props.changed} value={props.names}/>

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './App.module.css';
-import './Person/Person.css';
-import Person from './Person/Person'
+import './components/Persons/Person/Person.css';
+import Person from './components/Persons/Person/Person'
+import ErrorBoundary from './components/Error/ErrorBoundary'
 import Radium, {StyleRoot} from 'radium'
 import cssclasses from './App.module.css';
 
@@ -11,12 +12,12 @@ class App extends Component {
         persons: [
             {id: 1, name: 'Eva', age: 21},
             {id: 2, name: 'Adam', age: 22},
-            {id: 3, name: 'wiktor', age: 3}
+            {id: 3, name: 'Victor', age: 33}
         ],
 
         username: 'Adam 1',
         showPersons: true
-    }
+    };
 
     inputChangeName = (emit, id) => {
         const personIndex = this.state.persons.findIndex(p => {
@@ -50,12 +51,16 @@ class App extends Component {
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
-                            return <Person
-                                click ={() => this.deletePerson(index)}
-                                key={person.id}
-                                name={person.name}
-                                changed={(event) => this.inputChangeName(event, person.id)}
-                            />
+                            return <ErrorBoundary
+                                key = {person.id}>
+                                <Person
+                                    click ={() => this.deletePerson(index)}
+                                    key={person.id}
+                                    name={person.name}
+                                    age={person.age}
+                                    changed={(event) => this.inputChangeName(event, person.id)}
+                                    />
+                        </ErrorBoundary>
                         }
                     )}
                 </div>
@@ -73,7 +78,6 @@ class App extends Component {
 
 
         return (
-            <StyleRoot>
             <div className={cssclasses.App}>
                 <p >One two</p>
 
@@ -86,8 +90,7 @@ class App extends Component {
                 </div>
 
             </div>
-            </StyleRoot>
-                );
+        );
     }
 }
 
